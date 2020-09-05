@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <!-- Navigation -->
+       <app-navbar></app-navbar>
+       <div id="page-wrapper">
+       <div class="graphs">
+        <div class="content_bottom">
+            <h4>Generated Pins</h4>
+            <div class="col-md-12 span_3">
+                 <div class="bs-example1" data-example-id="contextual-table">
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th>Pin</th>
+                         <th>Balance</th>
+                         <th>Date</th>
+                         <th>Manage</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr *ngFor="let pin of pins" class="{{getClass(pin)}}">
+                         <th scope="row">{{pin.pos}}</th>
+                         <td>{{pin.pin}}</td>
+                         <td>{{'₦' + pin.balance}}</td>
+                         <td>{{pin.date_created}}</td>
+                         <td><button type="button" class="btn btn-warning warning_33">View Transaction</button></td>
+                       </tr>
+                     </tbody>
+                   </table>
+                  </div>
+              </div>
+              <div class="clearfix"> </div>
+       </div>
+       <div class="copy">
+            <p>Copyright &copy; 2015 Modern. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+        </div>
+      </div>
+     <!-- /#page-wrapper -->
+  </div>

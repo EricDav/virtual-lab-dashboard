@@ -2,5 +2,144 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "admin-dashboard": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/admin-dashboard",
+      "sourceRoot": "projects/admin-dashboard/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/admin-dashboard",
+            "index": "projects/admin-dashboard/src/index.html",
+            "main": "projects/admin-dashboard/src/main.ts",
+            "polyfills": "projects/admin-dashboard/src/polyfills.ts",
+            "tsConfig": "projects/admin-dashboard/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/admin-dashboard/src/favicon.ico",
+              "projects/admin-dashboard/src/assets"
+            ],
+            "styles": [
+              "projects/admin-dashboard/src/styles.css",
+              "projects/admin-dashboard/src/assets/css/bootstrap.min.css",
+              "projects/admin-dashboard/src/assets/css/clndr.css",
+              "projects/admin-dashboard/src/assets/css/custom.css",
+              "projects/admin-dashboard/src/assets/css/font-awesome.css",
+              "projects/admin-dashboard/src/assets/css/jqvmap.css",
+              "projects/admin-dashboard/src/assets/css/lines.css",
+              "projects/admin-dashboard/src/assets/css/style.css"
+            ],
+            "scripts": [
+              "projects/admin-dashboard/src/assets/js/jquery.min.js",
+              "projects/admin-dashboard/src/assets/js/jquery.vmap.js",
+              "projects/admin-dashboard/src/assets/js/jquery.vmap.sampledata.js",
+              "projects/admin-dashboard/src/assets/js/jquery.vmap.world.js",
+              "projects/admin-dashboard/src/assets/js/bootstrap.min.js",
+              "projects/admin-dashboard/src/assets/js/Chart.js",
+              "projects/admin-dashboard/src/assets/js/clndr.js",
+              "projects/admin-dashboard/src/assets/js/custom.js",
+              "projects/admin-dashboard/src/assets/js/d3.v3.js",
+              "projects/admin-dashboard/src/assets/js/moment-2.2.1.js",
+              "projects/admin-dashboard/src/assets/js/rickshaw.js",
+              "projects/admin-dashboard/src/assets/js/site.js",
+              "projects/admin-dashboard/src/assets/js/underscore-min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/admin-dashboard/src/environments/environment.ts",
+                  "with": "projects/admin-dashboard/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "admin-dashboard:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "admin-dashboard:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "admin-dashboard:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/admin-dashboard/src/test.ts",
+            "polyfills": "projects/admin-dashboard/src/polyfills.ts",
+            "tsConfig": "projects/admin-dashboard/tsconfig.spec.json",
+            "karmaConfig": "projects/admin-dashboard/karma.conf.js",
+            "assets": [
+              "projects/admin-dashboard/src/favicon.ico",
+              "projects/admin-dashboard/src/assets"
+            ],
+            "styles": [
+              "projects/admin-dashboard/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/admin-dashboard/tsconfig.app.json",
+              "projects/admin-dashboard/tsconfig.spec.json",
+              "projects/admin-dashboard/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/admin-dashboard/e2e/protractor.conf.js",
+            "devServerTarget": "admin-dashboard:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "admin-dashboard:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "admin-dashboard"
 }

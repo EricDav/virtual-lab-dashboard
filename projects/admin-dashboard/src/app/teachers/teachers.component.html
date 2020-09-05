@@ -1,0 +1,81 @@
+<div id="wrapper">
+    <!-- Navigation -->
+       <app-navbar></app-navbar>
+       <div id="page-wrapper">
+       <div class="graphs">
+        <div class="content_bottom">
+            <h4>Teachers</h4>
+            <div class="add-teacher">
+                <div><button type="button" class="btn btn-warning warning_33" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i>  Add Teacher</button></div>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h2 class="modal-title">Add Teacher</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div *ngIf="showSuccess" class="alert alert-success" role="alert">
+                                Teacher added successfully
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 grid_box1">
+                                    <input (keyup)="onFirstNameChange($event)" type="text" class="form-control1" placeholder="First Name">
+                                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.firstName">{{errorMessage.firstName}}</span>
+                                </div>
+                                <div class="col-md-6 grid_box1">
+                                    <input (keyup)="onLastNameChange($event)" type="text" class="form-control1" placeholder="Last Name">
+                                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.lastName">{{errorMessage.lastName}}</span>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px;" class="row">
+                                <div class="col-md-6 grid_box1">
+                                    <input (keyup)="onEmailChange($event)" type="text" class="form-control1" placeholder="Email">
+                                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.email">{{errorMessage.email}}</span>
+                                </div>
+                                <div class="col-md-6 grid_box1">
+                                    <input (keyup)="onPasswordChange($event)" type="text" class="form-control1" placeholder="Password">
+                                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.password">{{errorMessage.password}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal" #closeAddTeacherModal>Close</button>
+                            <button style="width: 100px;" (click)="save()" type="button" class="btn btn-warning warning_33">Save</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <div class="col-md-12 span_3">
+                 <div class="bs-example1" data-example-id="contextual-table">
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th>Full Name</th>
+                         <th>Email</th>
+                         <th>Password</th>
+                         <th>Manage</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr *ngFor="let teacher of teachers" class="{{getClass(teacher)}}">
+                         <td>{{teacher.pos}}</td>
+                         <th scope="row">{{teacher.name}}</th>
+                         <td>{{teacher.email}}</td>
+                         <td>{{teacher.password}}</td>
+                         <td><button type="button" class="btn btn-warning warning_33">Manage</button></td>
+                       </tr>
+                     </tbody>
+                   </table>
+                  </div>
+              </div>
+              <div class="clearfix"> </div>
+       </div>
+       <div class="copy">
+            <p>Copyright &copy; 2015 Modern. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+        </div>
+      </div>
+     <!-- /#page-wrapper -->
+  </div>

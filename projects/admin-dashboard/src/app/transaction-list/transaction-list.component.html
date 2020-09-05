@@ -1,0 +1,41 @@
+<div id="wrapper">
+    <!-- Navigation -->
+       <app-navbar></app-navbar>
+       <div id="page-wrapper">
+       <div class="graphs">
+        <div class="content_bottom">
+            <h4>Transactions</h4>
+            <div class="col-md-12 span_3">
+                 <div class="bs-example1" data-example-id="contextual-table">
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th>Date</th>
+                         <th>Transaction</th>
+                         <th>Credit</th>
+                         <th>Debit</th>
+                         <th>Balance</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr *ngFor="let transaction of transactions" class="{{getClass(transaction)}}">
+                         <th scope="row">{{transaction.pos}}</th>
+                         <td>{{transaction.date_created}}</td>
+                         <td>{{transaction.transaction}}</td>
+                         <td>{{transaction.credit}}</td>
+                         <td>{{transaction.debit}}</td>
+                         <td>{{transaction.balance}}</td>
+                       </tr>
+                     </tbody>
+                   </table>
+                  </div>
+              </div>
+              <div class="clearfix"> </div>
+       </div>
+       <div class="copy">
+            <p>Copyright &copy; 2015 Modern. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+        </div>
+      </div>
+     <!-- /#page-wrapper -->
+  </div>

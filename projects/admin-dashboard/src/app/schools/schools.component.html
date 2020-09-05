@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <!-- Navigation -->
+       <app-navbar></app-navbar>
+       <div id="page-wrapper">
+       <div class="graphs">
+        <div class="content_bottom">
+            <h4>My Schools</h4>
+            <div class="col-md-12 span_3">
+                 <div class="bs-example1" data-example-id="contextual-table">
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th>School Name</th>
+                         <th>Phone Number</th>
+                         <th>Date</th>
+                         <th>Manage</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr (click)="moveToSingleSchool(school)" *ngFor="let school of schools" class="{{getClass(school)}}">
+                         <td>{{school.pos}}</td>
+                         <th scope="row">{{school.name}}</th>
+                         <td>{{school.phone_number}}</td>
+                         <td>{{school.date_created}}</td>
+                         <td><button type="button" class="btn btn-warning warning_33">View Transaction</button></td>
+                       </tr>
+                     </tbody>
+                   </table>
+                  </div>
+              </div>
+              <div class="clearfix"> </div>
+       </div>
+       <div class="copy">
+            
+        </div>
+      </div>
+     <!-- /#page-wrapper -->
+  </div>

@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <!-- Navigation -->
+       <app-navbar></app-navbar>
+       <div id="page-wrapper">
+       <div class="graphs">
+        <div class="content_bottom">
+            <h4>Activations</h4>
+            <div class="col-md-12 span_3">
+                 <div class="bs-example1" data-example-id="contextual-table">
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th>Date</th>
+                         <th>Product Id</th>
+                         <th>Activation Key</th>
+                         <th>Manage</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr *ngFor="let activation of activations" class="{{getClass(activation)}}">
+                         <th scope="row">{{activation.pos}}</th>
+                         <td>{{activation.date_generated}}</td>
+                         <td>{{activation.product_id}}</td>
+                         <td>{{activation.activation_key}}</td>
+                         <td><button type="button" class="btn btn-warning warning_33">View Transaction</button></td>
+                       </tr>
+                     </tbody>
+                   </table>
+                  </div>
+              </div>
+              <div class="clearfix"> </div>
+       </div>
+       <div class="copy">
+        <p>Copyright &copy; 2020 Modern. All Rights Reserved | Design by <a href="" target="_blank">Virtual Science Lab</a> </p>
+    </div>
+      </div>
+     <!-- /#page-wrapper -->
+  </div>

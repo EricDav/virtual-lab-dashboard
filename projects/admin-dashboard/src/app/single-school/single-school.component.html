@@ -1,0 +1,72 @@
+<div id="wrapper">
+    <!-- Navigation -->
+       <app-navbar></app-navbar>
+       <div id="page-wrapper">
+       <div class="graphs">
+        <div class="content_bottom">
+            <div>
+                <div class="details"><div>Name:</div><div>{{schoolData.name}}</div></div>
+                <div class="details"><div>Address:</div><div>{{schoolData.address + ' ' + schoolData.city + ' ' + schoolData.country}}</div></div>
+                <div class="details"><div>Email:</div><div>{{schoolData.email}}</div></div>
+            </div>
+            <h4>Classrooms</h4>
+            <div class="add-teacher">
+                <div><button type="button" class="btn btn-warning warning_33" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i>Add Classroom</button></div>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h2 class="modal-title">Add Classroom</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div *ngIf="showSuccess" class="alert alert-success" role="alert">
+                                Classroom added successfully
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 grid_box1">
+                                    <input (keyup)="onNameChange($event)" type="text" class="form-control1" placeholder="Classroom Name">
+                                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.firstName">{{errorMessage}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal" #closeAddTeacherModal>Close</button>
+                            <button style="width: 100px;" (click)="addClassroom()" type="button" class="btn btn-warning warning_33">Save</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <div class="col-md-12 span_3">
+                 <div class="bs-example1" data-example-id="contextual-table">
+                   <table class="table">
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th>Name</th>
+                         <th>Class Teacher</th>
+                         <th>Num Students</th>
+                         <th>Manage</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr *ngFor="let classroom of schoolData.classrooms" class="{{getClass(classroom)}}">
+                         <td>{{classroom.pos}}</td>
+                         <td>{{classroom.name}}</td>
+                         <th scope="row">{{classroom.teacher}}</th>
+                         <td>{{classroom.num_students}}</td>
+                         <td><button type="button" class="btn btn-warning warning_33">Manage</button></td>
+                       </tr>
+                     </tbody>
+                   </table>
+                  </div>
+              </div>
+              <div class="clearfix"> </div>
+       </div>
+       <div class="copy">
+            <p>Copyright &copy; 2015 Modern. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+        </div>
+      </div>
+     <!-- /#page-wrapper -->
+  </div>

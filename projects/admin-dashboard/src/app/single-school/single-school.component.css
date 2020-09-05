@@ -1,0 +1,19 @@
+.add-teacher {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+h4 {
+    margin-top: 20px;
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+}
+
+.details > div {
+    font-weight: bold;
+}
