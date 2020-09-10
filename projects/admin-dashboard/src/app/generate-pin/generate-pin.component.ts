@@ -55,10 +55,12 @@ export class GeneratePinComponent implements OnInit {
               this.showSuccess = true;
              } else {
                this.showSuccess = false;
+               this.errorMessage = data.message;
              }
           },
           error => {
-            console.log(error);
+            this.showSuccess = false;
+            this.errorMessage = 'Unexpected error occurred';
           });
     }
 
