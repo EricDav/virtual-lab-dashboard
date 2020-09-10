@@ -12,21 +12,28 @@ import { TransfersComponent } from './transfers/transfers.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { TeachersComponent } from './teachers/teachers.component';
 import { SingleSchoolComponent } from './single-school/single-school.component';
-
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './_guard/auth.guard';
+import { LogoutGuard } from './_guard/logout.guard';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
-  {path: 'generate-pin', component: GeneratePinComponent},
-  {path: 'pins', component: PinsComponent},
-  {path: 'add-school', component: CreateSchoolComponent},
-  {path: 'schools', component: SchoolsComponent},
-  {path: 'schools/:id', component: SingleSchoolComponent},
-  {path: 'activate', component: ActivationComponent},
-  {path: 'activation-keys', component: ActivationKeysComponent},
-  {path: 'transactions', component: TransactionListComponent},
-  {path: 'transfers', component: TransfersComponent},
-  {path: 'deposit', component: DepositComponent},
-  {path: 'teachers', component: TeachersComponent},
+  {path: '', component: LoginComponent, canActivate: [LogoutGuard]},
+  {path: 'signup', component: SignupComponent,  canActivate: [LogoutGuard]},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'generate-pin', component: GeneratePinComponent, canActivate: [AuthGuard]},
+  {path: 'pins', component: PinsComponent, canActivate: [AuthGuard]},
+  {path: 'add-school', component: CreateSchoolComponent, canActivate: [AuthGuard]},
+  {path: 'schools', component: SchoolsComponent, canActivate: [AuthGuard]},
+  {path: 'schools/:id', component: SingleSchoolComponent, canActivate: [AuthGuard]},
+  {path: 'activate', component: ActivationComponent, canActivate: [AuthGuard]},
+  {path: 'activation-keys', component: ActivationKeysComponent, canActivate: [AuthGuard]},
+  {path: 'transactions', component: TransactionListComponent, canActivate: [AuthGuard]},
+  {path: 'transfers', component: TransfersComponent, canActivate: [AuthGuard]},
+  {path: 'deposit', component: DepositComponent, canActivate: [AuthGuard]},
+  {path: 'teachers', component: TeachersComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -1,3 +1,21 @@
 tr:nth-child(2){
     background-color: #fff!important;
 }
+
+h2 {
+    color: #000;
+}
+.pin {
+    font-size: 16px;
+}
+
+.history-date {
+    font-size: 14px;
+    font-style: oblique;
+}
+
+.history-detail {
+    font-weight: 550;
+    font-size: 14px;
+    color: #000;
+}

@@ -11,19 +11,20 @@ import { Router } from '@angular/router';
 export class SchoolsComponent implements OnInit {
 
   schools = [];
+  token = '';
   constructor(
     private schoolService: SchoolService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('currentUser');
     this.getSchools();
   }
 
   getSchools() {
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkQGdtYWlsLmNvbSIsIm5hbWUiOiJEYXZpZCBBbGllbnlpIiwiaWQiOjUsImV4cCI6MTU5OTY3NTkxNn0.7a11QOHjFCxfyYcbsPgjc4OUwuopWw5Ulw5uqbxyrzk';
-    let schools = []
-    this.schoolService.get(token)
+    let schools = [];
+    this.schoolService.get(this.token)
     .pipe(first())
     .subscribe(
         data =>  {

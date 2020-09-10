@@ -1,8 +1,8 @@
-<div class="navbar-default sidebar" role="navigation">
+<div style="position: fixed;" [ngStyle]="{'height': scrHeight}" class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a routerLink="/"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
+                <a routerLink="/dashboard"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
             </li>
             <li>
                 <a href="#">Pins</a>
@@ -11,21 +11,21 @@
             </li>
             <li>
                 <a href="#">Activations</a>
-                <a style="color: #fff" routerLink="/activate"><i class="fa fa-product-hunt nav_icon"></i>Product Activation</a>
+                <a style="color: #fff" routerLink="/activate"><i class="fa fa-envelope-open nav_icon" aria-hidden="true"></i>Product Activation</a>
                 <a style="color: #fff" routerLink="/activation-keys"><i class="fa fa-history nav_icon"></i>Activation History</a>
             </li>
              <li>
                 <a href="#">Schools</a>
-                <a style="color: #fff" routerLink="/add-school"><i class="fa fa-check-square-o nav_icon"></i>Add School</a>
+                <a style="color: #fff" routerLink="/add-school"><i class="fa fa-plus"></i>  Add School</a>
                 <a style="color: #fff" routerLink="/schools"><i class="fa fa-check-square-o nav_icon"></i>My Schools</a>
-                <a style="color: #fff" routerLink="/teachers"><i class="fa fa-check-square-o nav_icon"></i>Teachers</a>
+                <a style="color: #fff" routerLink="/teachers"><i class="fa fa-users"></i>   Teachers</a>
                 <!-- /.nav-second-level -->
             </li>
             <li>
                 <a href="#">Transactions</a>
-                <a style="color: #fff" routerLink="/transfers"><i class="fa fa-sitemap fa-fw nav_icon"></i>Transfer</a>
-                <a style="color: #fff" routerLink="/deposit"><i class="fa fa-sitemap fa-fw nav_icon"></i>Deposit</a>
-                <a style="color: #fff" routerLink="/transactions"><i class="fa fa-sitemap fa-fw nav_icon"></i>Transaction List</a>
+                <a style="color: #fff" routerLink="/transfers"><i class="fa fa-exchange"></i>   Transfer</a>
+                <a style="color: #fff" routerLink="/deposit"><i class="fa fa-credit-card"></i>  Deposit</a>
+                <a style="color: #fff" routerLink="/transactions"><i class="fa fa-list"></i>    Transaction List</a>
             </li>
         </ul>
     </div>

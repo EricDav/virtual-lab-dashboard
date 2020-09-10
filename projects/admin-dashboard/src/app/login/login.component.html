@@ -1,0 +1,25 @@
+<div class="login-body">
+<div class="login-logo">
+    <h2>Virtual Science Lab</h2>
+  </div>
+  <h2 class="form-heading">login</h2>
+  <div class="app-cam">
+	  <form >
+        <div style="color:rgb(255, 0, 0); font-size: 13px; font-style: oblique;">
+            {{errorMessage}}
+        </div>
+		<input (keyup)="onEmailChange($event)" type="text" class="text" placeholder="Email address">
+		<input (keyup)="onPasswordChange($event)" type="password" placeholder="password">
+		<div class="submit"><input class="{{submitClass}}" [disabled]="!isSubmit" type="submit" (click)="login()"></div>
+
+		<ul class="new">
+			<li class="new_left"><p><a href="#">Forgot Password ?</a></p></li>
+			<li class="new_right"><p class="sign">New here ?<a routerLink="signup"> Sign Up</a></p></li>
+			<div class="clearfix"></div>
+		</ul>
+	</form>
+  </div>
+   <div class="copy_layout login">
+      <p>Copyright &copy; 2020 Virtual Science Lab. All Rights Reserved</p>
+   </div>
+</div>

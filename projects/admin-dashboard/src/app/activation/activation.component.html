@@ -15,23 +15,35 @@
             <div *ngIf="showError" class="alert alert-danger" role="alert">
                 {{errorMessage}}
             </div>
+            <div class="row">
+                <div class="col-md-4 grid_box1">
+                    <select (change)=onChange($event)>
+                        <option value="1">Activate Directly from balance</option>
+                        <option value="2">Activate With Pin</option>
+                    </select>
+                </div>
+            </div>
+            <div style="margin-bottom: 10px;" *ngIf="activationType=='2'" class="row">
+                <div class="col-md-4 grid_box1">
+                    <input (keyup)="onPinKey($event)" type="text" class="form-control1" placeholder="Enter Pin">
+                </div>
+            </div>
+
            <div class="row">
                <div class="col-md-4 grid_box1">
                    <input (keyup)="onKey($event)" type="text" class="form-control1" placeholder="Product Key">
                </div>
-               <div class="col-md-4">
-                    <button (click)="onClick()" type="button" class="btn btn_5 btn-lg btn-warning warning_11">Activate</button>
-               </div>
                <div class="clearfix"> </div>
            </div>
+           <div style="margin-top: 10px;" class="row">
+            <button (click)="onClick()"  type="submit" class="btn btn-warning warning_33">Activate Now</button>
+            </div>
         </div>
            </div>
         <div class="content_bottom">
        <div class="clearfix"> </div>
        </div>
-       <div class="copy">
-        <p>Copyright &copy; 2020 Modern. All Rights Reserved | Design by <a href="" target="_blank">Virtual Science Lab</a> </p>
-    </div>
+       <app-footer></app-footer>
        </div>
       </div>
      <!-- /#page-wrapper -->

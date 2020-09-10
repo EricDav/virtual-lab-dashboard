@@ -17,3 +17,8 @@ h4 {
 .details > div {
     font-weight: bold;
 }
+
+select {
+    height: 45px;
+    width: 60%;
+}

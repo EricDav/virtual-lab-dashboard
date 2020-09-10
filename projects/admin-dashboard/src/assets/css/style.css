@@ -44,7 +44,7 @@ body a{
   height: 32px;
 }
 .navbar .navbar-nav li .dropdown-menu {
-  margin-top: 3px;
+  margin-top: 50px;
   border: none;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -206,7 +206,7 @@ body a{
   top: 20px;
 }
 .navbar .navbar-nav li a .badge {
-  background: #ff5454;
+  background: #23449d;
   border: 2px solid white;
   position: absolute;
   top: 9px;
@@ -225,6 +225,9 @@ body a{
   height: 1000px;
 }
 nav.top1.navbar.navbar-default.navbar-static-top {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background-color: #fff;
   font-family: 'Roboto', sans-serif;
   min-height: 70px !important;
@@ -859,6 +862,7 @@ i.dollar1{
 }
 /*-- graphs --*/
 .graphs{
+  margin-top: 70px;
   padding: 2em 1em;
   background: #f2f4f8;
   font-family: 'Roboto', sans-serif;
@@ -886,7 +890,9 @@ canvas#doughnut, canvas#line, canvas#polarArea, #bar, #pie, #radar{
 .form-control1, .form-control_2.input-sm{
   border: 1px solid #e0e0e0;
   padding: 5px 8px;
-  color: #616161;
+  color: #000;
+  font-size: 15px !important;
+  font-weight: 500;
   background: #fff;
   box-shadow: none !important;
   width: 100%;
@@ -1094,8 +1100,8 @@ button.note-color-btn {
 }
 h2.modal-title {
   font-size: 1.3em;
-  color:#999;
-  font-weight: 300;
+  color:#000;
+  font-weight: 500;
 }
 .modal-content {
   -ms-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
@@ -1478,7 +1484,6 @@ div.checker input {
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   font-size: 0.85em;
-  color: #999;
 } 
 .mailbox-content table tbody tr:hover {
   background: #FAFAFA;
@@ -2042,7 +2047,8 @@ h2.form-heading {
   display: inline-block;
   width: 100%;
 }
-body#login{
+
+.login-body{
   background: url(../images/bg.jpg)no-repeat;
   background-size:cover;
   -webkit-background-size:cover;

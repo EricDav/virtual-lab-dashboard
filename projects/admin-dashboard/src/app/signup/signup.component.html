@@ -1,0 +1,45 @@
+<div class="login-body">
+<div class="login-logo">
+    <a href="index.html"><img src="images/logo.png" alt=""/></a>
+  </div>
+  <h2 class="form-heading">Register</h2>
+  <form class="form-signin app-cam" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <p>Enter your personal details below</p>
+      <div style="margin-bottom: unset;" class="form-group">
+        <input formControlName="firstName" type="text" class="form-control1" placeholder="First Name" autofocus="">
+        <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.firstName">{{errorMessage.firstName}}</span>
+      </div>
+      <div style="margin-bottom: unset;"  class="form-group">
+        <input formControlName="lastName" type="text" class="form-control1" placeholder="Last Name" autofocus="">
+        <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.lastName">{{errorMessage.lastName}}</span>
+      </div>
+
+      <div style="margin-bottom: unset;"  class="form-group">
+        <input formControlName="email" type="text" class="form-control1" placeholder="Email" autofocus="">
+        <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.email">{{errorMessage.email}}</span>
+      </div>
+
+      <div style="margin-bottom: unset;"  class="form-group">
+        <input formControlName="password" type="password" class="form-control1" placeholder="Password">
+        <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.password">{{errorMessage.password}}</span>
+      </div>
+      <div style="margin-bottom: unset;"  class="form-group">
+        <input formControlName="rePassword" type="password" class="form-control1" placeholder="Re-type Password">
+        <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.rePassword">{{errorMessage.rePassword}}</span>
+      </div>
+
+      <label class="checkbox-custom check-success">
+          <input type="checkbox" value="agree this condition" id="checkbox1"> <label for="checkbox1">I agree to the Terms of Service and Privacy Policy</label>
+      </label>
+      <button class="btn btn-lg btn-success1 btn-block" type="submit">Submit</button>
+      <div class="registration">
+          Already Registered.
+          <a class="" routerLink="/">
+              Login
+          </a>
+      </div>
+  </form>
+  <div style="margin-top: 6rem;" class="copy_layout login">
+    <p>Copyright &copy; 2020 Virtual Science Lab. All Rights Reserved</p>
+ </div>
+</div>

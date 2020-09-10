@@ -29,13 +29,12 @@
                        </tr>
                      </tbody>
                    </table>
+                   <div *ngIf="isEmpty" style="text-align: center;font-weight: 700;">You have not made any transactions</div>
                   </div>
               </div>
               <div class="clearfix"> </div>
        </div>
-       <div class="copy">
-            <p>Copyright &copy; 2015 Modern. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
-        </div>
+       <app-footer></app-footer>
       </div>
      <!-- /#page-wrapper -->
   </div>

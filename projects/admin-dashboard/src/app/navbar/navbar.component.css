@@ -1,0 +1,13 @@
+a {
+    cursor: pointer;
+}
+
+.navbar-brand {
+    height: 70px;
+    padding: 24px;
+}
+
+.first-name {
+    font-size: 18px;
+    font-weight: 600;
+}

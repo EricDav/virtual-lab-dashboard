@@ -2,6 +2,32 @@
     <!-- Navigation -->
        <app-navbar></app-navbar>
        <div id="page-wrapper">
+        <div style="visibility: hidden;"><button id="openModal" type="button" class="btn btn-warning warning_33" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i>  Add Teacher</button></div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h2 class="modal-title"><b>{{currentPin}}</b></h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 grid_box1">
+                                <div class="history-detail" *ngIf="pinHistory.length == 0">This Pin has not been used </div>
+                                <div *ngFor="let pinHis of pinHistory">
+                                    <div class="history-detail">{{pinHis.pin_user + ' ' + 'Activated a product of' + ' ₦' + pinHis.amount}}</div>
+                                    <div class="history-date">{{getLocalFormatedDate(pinHis.transaction_date)}}</div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button style="width: 100px;"  type="button" class="btn btn-warning warning_33">Okay</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
        <div class="graphs">
         <div class="content_bottom">
             <h4>Generated Pins</h4>
@@ -20,20 +46,19 @@
                      <tbody>
                        <tr *ngFor="let pin of pins" class="{{getClass(pin)}}">
                          <th scope="row">{{pin.pos}}</th>
-                         <td>{{pin.pin}}</td>
+                         <td class="pin"><b>{{pin.pin}}</b></td>
                          <td>{{'₦' + pin.balance}}</td>
                          <td>{{pin.date_created}}</td>
-                         <td><button type="button" class="btn btn-warning warning_33">View Transaction</button></td>
+                         <td><button (click)="showHistory(pin)" type="button" class="btn btn-warning warning_33">View History</button></td>
                        </tr>
                      </tbody>
                    </table>
+                   <div *ngIf="isEmpty" style="text-align: center;font-weight: 700;">You have not generated any pin yet.</div>
                   </div>
               </div>
               <div class="clearfix"> </div>
        </div>
-       <div class="copy">
-            <p>Copyright &copy; 2015 Modern. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
-        </div>
+       <app-footer></app-footer>
       </div>
      <!-- /#page-wrapper -->
   </div>

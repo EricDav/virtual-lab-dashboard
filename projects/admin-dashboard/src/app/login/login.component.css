@@ -1,0 +1,11 @@
+h2 {
+    color: #17449e;
+}
+
+.cur {
+    cursor: pointer !important;
+}
+
+.cur-w {
+    cursor: unset !important;
+}

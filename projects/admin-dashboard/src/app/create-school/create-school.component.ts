@@ -13,13 +13,14 @@ export class CreateSchoolComponent implements OnInit {
   isError = false;
   showSuccess = false;
   errorMessage = {name: '', address: '', email: '', city: '', phoneNumber: ''};
-
+  token = '';
   constructor(
     private formBuilder: FormBuilder,
     private schoolService: SchoolService,
   ) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('currentUser');
     this.schoolForm = this.formBuilder.group({
       name: ['', Validators.required],
       city: ['', Validators.required],
@@ -36,7 +37,6 @@ export class CreateSchoolComponent implements OnInit {
     this.errorMessage = {name: '', address: '', email: '', city: '', phoneNumber: ''};
     this.validateInputs();
     if (!this.isError) {
-      const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkQGdtYWlsLmNvbSIsIm5hbWUiOiJEYXZpZCBBbGllbnlpIiwiaWQiOjUsImV4cCI6MTU5ODg5ODc1M30.RAw7GgI5dVEID6Px6UUo5V3_dgh26tfNz3ndpzfN18g';
       const schoolData = {
         name: this.f.name.value,
         email: this.f.email.value,
@@ -44,7 +44,7 @@ export class CreateSchoolComponent implements OnInit {
         city: this.f.city.value,
         phone_number: this.f.phoneNumber.value,
         country: this.f.country.value,
-        token: token
+        token: this.token
       }
       this.schoolService.create(schoolData)
       .pipe(first())

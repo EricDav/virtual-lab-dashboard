@@ -14,7 +14,7 @@
                          <th>Date</th>
                          <th>Product Id</th>
                          <th>Activation Key</th>
-                         <th>Manage</th>
+                         <th>Method</th>
                        </tr>
                      </thead>
                      <tbody>
@@ -23,17 +23,16 @@
                          <td>{{activation.date_generated}}</td>
                          <td>{{activation.product_id}}</td>
                          <td>{{activation.activation_key}}</td>
-                         <td><button type="button" class="btn btn-warning warning_33">View Transaction</button></td>
+                         <td>{{activation.method}}</td>
                        </tr>
                      </tbody>
                    </table>
+                   <div *ngIf="isEmpty" style="text-align: center;font-weight: 700;">You haven't made any activations</div>
                   </div>
               </div>
               <div class="clearfix"> </div>
        </div>
-       <div class="copy">
-        <p>Copyright &copy; 2020 Modern. All Rights Reserved | Design by <a href="" target="_blank">Virtual Science Lab</a> </p>
-    </div>
+       <app-footer></app-footer>
       </div>
      <!-- /#page-wrapper -->
   </div>

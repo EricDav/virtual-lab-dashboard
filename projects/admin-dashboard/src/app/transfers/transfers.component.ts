@@ -13,12 +13,14 @@ export class TransfersComponent implements OnInit {
   showSuccess = false;
   showError = false;
   errorMessage = '';
+  token = '';
 
   constructor(
     private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('currentUser');
   }
 
   onKeyEmail(event: any) {
@@ -30,12 +32,28 @@ export class TransfersComponent implements OnInit {
   }
 
   onClick() {
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkQGdtYWlsLmNvbSIsIm5hbWUiOiJEYXZpZCBBbGllbnlpIiwiaWQiOjUsImV4cCI6MTU5OTI0MjkxNn0.KTP92kc3hcE6PzM3GatLthMZCHFb_oy_oIbEChR9sP4';
+    this.showError = false;
+    this.showSuccess = false;
     const data = {
       email: this.userEmail,
       amount: this.amount,
-      token: token
+      token: this.token
     };
+
+    if (!this.userEmail.trim()) {
+      this.showError = true;
+      this.showSuccess = false;
+      this.errorMessage = 'User email is required';
+      return;
+    }
+
+    if (!this.amount.trim()) {
+      this.showError = true;
+      this.showSuccess = false;
+      this.errorMessage = 'Amount is required';
+      return;
+    }
+
     this.userService.transferFund(data)
     .pipe(first())
     .subscribe(

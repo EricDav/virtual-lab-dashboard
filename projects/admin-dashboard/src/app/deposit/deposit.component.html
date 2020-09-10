@@ -25,7 +25,7 @@
                     [amount]="amount"
                     [ref]="reference"
                     [channels]="['card','bank']"
-                    [class]="'btn btn-primary'"
+                    [class]="'btn btn_5 btn-lg btn-warning warning_33'"
                     (close)="paymentCancel()"
                     (callback)="paymentDone($event)"
                 >
@@ -39,9 +39,7 @@
         <div class="content_bottom">
        <div class="clearfix"> </div>
        </div>
-       <div class="copy">
-        <p>Copyright &copy; 2020 Modern. All Rights Reserved | Design by <a href="" target="_blank">Virtual Science Lab</a> </p>
-    </div>
+       <app-footer></app-footer>
        </div>
       </div>
   </div>

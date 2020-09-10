@@ -21,12 +21,15 @@ export class TeachersComponent implements OnInit {
     email: '',
     password: ''
   };
+  token = '';
+  isEmpty = false;
   constructor(
     private userService: UserService,
     private closeAddTeacherModal: ElementRef
   ) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('currentUser');
     this.getTeachers();
   }
 
@@ -92,8 +95,7 @@ export class TeachersComponent implements OnInit {
   }
 
   getTeachers() {
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkQGdtYWlsLmNvbSIsIm5hbWUiOiJEYXZpZCBBbGllbnlpIiwiaWQiOjUsImV4cCI6MTU5OTI0MjkxNn0.KTP92kc3hcE6PzM3GatLthMZCHFb_oy_oIbEChR9sP4';
-    this.userService.get(token, 2)
+    this.userService.getTeachers(this.token, 2)
     .pipe(first())
     .subscribe(
         data =>  {
@@ -105,7 +107,13 @@ export class TeachersComponent implements OnInit {
               teachers.push(item);
             });
             this.teachers = teachers;
+            if (this.teachers.length == 0) {
+              this.isEmpty = true;
+            } else {
+              this.isEmpty = false;
+            }
           } else {
+            
           }
         },
         error => {
@@ -122,6 +130,7 @@ export class TeachersComponent implements OnInit {
         role: 2,
         name: this.firstName + ' ' + this.lastName,
         email: this.email,
+        parent_id: JSON.parse(localStorage.getItem('user')).id,
         password: this.password
       }
       this.userService.create(data)

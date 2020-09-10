@@ -20,6 +20,10 @@ import { TransfersComponent } from './transfers/transfers.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { TeachersComponent } from './teachers/teachers.component';
 import { SingleSchoolComponent } from './single-school/single-school.component';
+import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
+import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { SingleSchoolComponent } from './single-school/single-school.component';
     TransfersComponent,
     DepositComponent,
     TeachersComponent,
-    SingleSchoolComponent
+    SingleSchoolComponent,
+    LoginComponent,
+    FooterComponent,
+    SignupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

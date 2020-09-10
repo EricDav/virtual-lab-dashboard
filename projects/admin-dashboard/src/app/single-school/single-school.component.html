@@ -13,6 +13,7 @@
             <div class="add-teacher">
                 <div><button type="button" class="btn btn-warning warning_33" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i>Add Classroom</button></div>
             </div>
+            <div style="visibility: hidden; height: 5px;"><button id="openAssignTeacherModal" type="button" class="btn btn-warning warning_33" data-toggle="modal" data-target="#assignTeacherModal"><i class="fa fa-plus" aria-hidden="true"></i>{{selectedClassroom}}</button></div>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -27,13 +28,44 @@
                             <div class="row">
                                 <div class="col-md-12 grid_box1">
                                     <input (keyup)="onNameChange($event)" type="text" class="form-control1" placeholder="Classroom Name">
-                                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.firstName">{{errorMessage}}</span>
+                                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage">{{errorMessage}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal" #closeAddTeacherModal>Close</button>
                             <button style="width: 100px;" (click)="addClassroom()" type="button" class="btn btn-warning warning_33">Save</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+
+            <div class="modal fade" id="assignTeacherModal" tabindex="-1" role="dialog" aria-labelledby="assignTeacherModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h2 class="modal-title">Assign Teacher</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div *ngIf="showAssignTeacherSuccess" class="alert alert-success" role="alert">
+                                Teacher Assigned successfully
+                            </div>
+                            <div *ngIf="assignTeacherErrorMessage" class="alert alert-danger" role="alert">
+                                {{assignTeacherErrorMessage}}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 grid_box1">
+                                    <select (change)=onChange($event)>
+                                        <option value="0">Select Teacher to Assign</option>
+                                        <option *ngFor="let teacher of teachers" value="{{teacher.teacher_id}}">{{teacher.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="closeAssignTeacherModal" type="button" class="btn btn-default" data-dismiss="modal" #closeAddTeacherModal>Close</button>
+                            <button style="width: 100px;" (click)="saveTeacher()" type="button" class="btn btn-warning warning_33">Save</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -56,17 +88,16 @@
                          <td>{{classroom.name}}</td>
                          <th scope="row">{{classroom.teacher}}</th>
                          <td>{{classroom.num_students}}</td>
-                         <td><button type="button" class="btn btn-warning warning_33">Manage</button></td>
+                         <td><button (click)="assignTeacher(classroom)" type="button" class="btn btn-warning warning_33">{{classroom.teacher == 'Unassigned' ? 'Assign Teacher' : 'Replace Teacher'}}</button></td>
                        </tr>
                      </tbody>
                    </table>
+                   <div *ngIf="isEmpty" style="text-align: center;font-weight: 700;">No class rooms Yet</div>
                   </div>
               </div>
               <div class="clearfix"> </div>
        </div>
-       <div class="copy">
-            <p>Copyright &copy; 2015 Modern. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
-        </div>
+       <app-footer></app-footer>
       </div>
      <!-- /#page-wrapper -->
   </div>

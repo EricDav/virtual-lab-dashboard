@@ -9,18 +9,20 @@ import { first } from 'rxjs/operators';
 })
 export class ActivationKeysComponent implements OnInit {
   activations = [];
+  token = '';
+  isEmpty = false;
 
   constructor(
     private activationService: ActivationService,
   ) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('currentUser');
     this.getActivations();
   }
 
   getActivations() {
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkQGdtYWlsLmNvbSIsIm5hbWUiOiJEYXZpZCBBbGllbnlpIiwiaWQiOjUsImV4cCI6MTU5ODcxMjMyN30.dGQd2L-acPpL0x5aMGzx4k5q8nUi7z6leNDfWllF00U';
-    this.activationService.get(token)
+    this.activationService.get(this.token)
     .pipe(first())
     .subscribe(
         data =>  {
@@ -30,6 +32,11 @@ export class ActivationKeysComponent implements OnInit {
             activations.push(item);
           });
           this.activations = activations;
+          if (this.activations.length == 0) {
+            this.isEmpty = true;
+          } else {
+            this.isEmpty = false;
+          }
         },
         error => {
           

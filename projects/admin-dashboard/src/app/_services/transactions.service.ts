@@ -2,6 +2,7 @@ import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TransactionService {
@@ -10,7 +11,7 @@ export class TransactionService {
     }
 
     get(token) {
-        return this.http.get<any>('http://localhost:8888/api/v1/transactions?token=' + token)
+        return this.http.get<any>(environment.apiBaseUrl + '/transactions?token=' + token)
         .pipe(map(transactions => {
             return transactions;
         }));

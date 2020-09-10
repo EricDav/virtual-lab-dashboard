@@ -14,11 +14,13 @@ export class DepositComponent implements OnInit {
   showFailure = false;
   userId = 5;
   errorMessage = '';
+  token = ''
   constructor(
     private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('currentUser');
     this.reference = `ref-${Math.ceil(Math.random() * 10e13)}`;
   }
 
@@ -30,7 +32,7 @@ export class DepositComponent implements OnInit {
 
   paymentDone(event) {
     const data = {
-      user_id: this.userId,
+      user_id: JSON.parse(localStorage.getItem('user')).id,
       ref: event.reference
     };
     this.userService.depositFund(data)

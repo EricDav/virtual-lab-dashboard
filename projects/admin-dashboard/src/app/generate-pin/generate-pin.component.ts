@@ -11,12 +11,14 @@ export class GeneratePinComponent implements OnInit {
     amount = 0;
     qty = 0;
     showSuccess = false;
+    token = '';
+    errorMessage = '';
     constructor(
       private pinService: PinService,
     ) { }
 
     ngOnInit(): void {
-      
+      this.token = localStorage.getItem('currentUser');
     }
 
     onKeyQty(event: any) {
@@ -28,9 +30,20 @@ export class GeneratePinComponent implements OnInit {
     }
 
     onClick() {
-      const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhdmlkQGdtYWlsLmNvbSIsIm5hbWUiOiJEYXZpZCBBbGllbnlpIiwiaWQiOjUsImV4cCI6MTU5ODcxMjMyN30.dGQd2L-acPpL0x5aMGzx4k5q8nUi7z6leNDfWllF00U';
+      this.errorMessage = '';
+      if (!this.qty) {
+        this.errorMessage = 'Quantity is required and should be greater than 0'
+      }
+
+      if (this.amount < 500) {
+        this.errorMessage = 'Amount is required and should be more than 500';
+      }
+
+      if (this.errorMessage) {
+        return;
+      }
       const data = {
-        token: token,
+        token: this.token,
         num_pins: this.qty,
         amount: this.amount
       }

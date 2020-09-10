@@ -1,0 +1,86 @@
+<div id="wrapper">
+    <!-- Navigation -->
+       <app-navbar></app-navbar>
+       <div id="page-wrapper">
+       <div class="graphs">
+        <div class="md">
+            <h3>My Profile</h3>
+        <div class="form-group">
+            <div *ngIf="showSuccess" class="alert alert-success alert-dismissible show" role="alert">
+                <strong>Hurray!</strong> User profile updated successfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+           <div class="row">
+               <div class="col-md-4 grid_box1">
+                   <input (keyup)="onKeyF($event)" type="text" value="{{user.firstName}}" class="form-control1" placeholder="First Name">
+                   <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.firstName">{{errorMessage.firstName}}</span>
+               </div>
+               <div class="clearfix"> </div>
+           </div>
+           <div style="margin-top: 10px;" class="row">
+                <div class="col-md-4 grid_box1">
+                    <input (keyup)="onKeyL($event)" type="text" class="form-control1" value="{{user.lastName}}" placeholder="Last Name">
+                    <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.lastName">{{errorMessage.lastName}}</span>
+                </div>
+           </div>
+           <div  class="row space">
+            <div class="col-md-4 grid_box1">
+                <input value="{{user.email}}" (keyup)="onKeyE($event)" type="text" class="form-control1" placeholder="Email">
+                <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.email">{{errorMessage.email}}</span>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="row space">
+            <div class="col-md-4 grid_box1">
+                <input value="{{user.phone_number}}" (keyup)="onKeyP($event)" type="text" class="form-control1" placeholder="Phone Number">
+                <span style="color: red; font-style: oblique; font-size: 14px;"  *ngIf="errorMessage.phoneNumber">{{errorMessage.phoneNumber}}</span>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div style="margin-top: 10px;" class="row">
+                <div class="col-md-4">
+                    <button (click)="onClick()" type="button" class="btn btn_5 btn-lg btn-warning warning_33">Update Profile</button>
+                </div>
+        </div>
+        </div>
+        <div class="form-group">
+            <div *ngIf="showPasswordSuccess" class="alert alert-success alert-dismissible show" role="alert">
+                <strong>Hurray!</strong> Password updated successfully.
+                <button (click)="closeSuccess()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div style="color:rgb(255, 0, 0); font-size: 13px; font-style: oblique;">
+                {{passwordErrorMessage}}
+            </div>
+
+           <div class="row">
+               <div class="col-md-4 grid_box1">
+                   <input (keyup)="onKeyOldPassword($event)" type="password" class="form-control1" placeholder="Old Password">
+               </div>
+               <div class="clearfix"> </div>
+           </div>
+
+           <div style="margin-top: 10px;" class="row">
+                <div class="col-md-4 grid_box1">
+                    <input (keyup)="onKeyNewPassword($event)" type="password" class="form-control1" placeholder="New Password">
+                </div>
+           </div>
+        <div style="margin-top: 10px;" class="row">
+                <div class="col-md-4">
+                    <button (click)="updatePassword()" type="button" class="btn btn_5 btn-lg btn-warning warning_33">Update Password</button>
+                </div>
+        </div>
+        </div>
+    </div>
+        <div class="content_bottom">
+       <div class="clearfix"> </div>
+       </div>
+       <app-footer></app-footer>
+       </div>
+      </div>
+     <!-- /#page-wrapper -->
+  </div>
