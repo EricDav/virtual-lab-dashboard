@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://localhost:8888/api/v1'
+  apiBaseUrl: 'http://virtual-lab.exclusiveroyal.com/api/v1'
 };

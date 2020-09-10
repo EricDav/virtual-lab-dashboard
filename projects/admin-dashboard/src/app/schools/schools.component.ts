@@ -12,6 +12,7 @@ export class SchoolsComponent implements OnInit {
 
   schools = [];
   token = '';
+  isEmpty = false;
   constructor(
     private schoolService: SchoolService,
     private router: Router
