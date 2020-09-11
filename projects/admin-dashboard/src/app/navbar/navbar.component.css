@@ -11,3 +11,8 @@ a {
     font-size: 18px;
     font-weight: 600;
 }
+
+/* @media (max-width:768px){	
+    .navbar-right {
+      margin-right:3px !important;
+} */

@@ -66,8 +66,8 @@ export class TransactionListComponent implements OnInit {
         data =>  {
           data.data.forEach(function(item, index) {
             item.pos = index + 1;
-            item.credit = item.transaction_type == '0' ? item.amount : '';
-            item.debit = item.transaction_type == '0' ?  '' : '-' + item.amount;
+            item.credit = item.transaction_type == '1' ? item.amount : '';
+            item.debit = item.transaction_type == '1' ?  '' : '-' + item.amount;
             var dateStr = item.date_created  + ' UTC';
             var fixtureDate = f.formatDateCreated(new Date(dateStr.replace(/-/g, '/')));
             item.date_created = fixtureDate;
