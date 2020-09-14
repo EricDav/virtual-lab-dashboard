@@ -8,7 +8,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   scrHeight = '300px';
-  scrWidth:any;
+  scrWidth = window.innerWidth;
 
   constructor() { }
 
@@ -18,7 +18,11 @@ export class SidebarComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
-      this.scrHeight = window.innerHeight.toString() + 'px';
+      if (this.scrWidth > 768) {
+        this.scrHeight = window.innerHeight.toString() + 'px';
+      } else {
+        this.scrHeight = 'fit-content';
+      }
       this.scrWidth = window.innerWidth;
   }
 

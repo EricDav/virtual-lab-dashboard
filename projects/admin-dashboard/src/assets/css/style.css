@@ -222,7 +222,6 @@ body a{
 .navbar-default.sidebar {
   background-color: #17449e;
   font-family: 'Roboto', sans-serif;
-  height: 1000px;
 }
 nav.top1.navbar.navbar-default.navbar-static-top {
   position: fixed;
@@ -769,7 +768,7 @@ i.icon_13{
   width: 23.5%;
 }
 .r3_counter_box {
-  min-height: 100px;
+  min-height: 120px;
   background: #ffffff;
   padding: 15px;
 }
@@ -2055,7 +2054,7 @@ h2.form-heading {
   -moz-background-size:cover;
   -o-background-size:cover;
   -ms-background-size:cover;
-  min-height:850px;
+  min-height:100%;
 }
 .app-cam {
   width:22%;
@@ -2402,9 +2401,19 @@ span.badge {
   right: 10px;
 }
 }
-@media (max-width:768px){	
+@media (max-width:768px){
+td {
+  font-size: 10px !important;
+}
+
+th {
+  font-size: 10px !important;
+}
 .navbar-right {
   margin-right:3px !important;
+}
+.graphs { 
+  margin-top: 0px;
 }
 .col-md-3.widget {
   width:100%;

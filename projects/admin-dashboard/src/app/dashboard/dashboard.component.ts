@@ -81,8 +81,8 @@ export class DashboardComponent implements OnInit {
             var dateStr = item.date_created  + ' UTC';
             var fixtureDate = f.formatDateCreated(new Date(dateStr.replace(/-/g, '/')));
             item.date_created = fixtureDate;
-            item.credit = item.transaction_type ? item.amount : '';
-            item.debit = item.transaction_type ?  '' : '-' + item.amount;
+            item.credit = item.transaction_type == '1' ? item.amount : '';
+            item.debit = item.transaction_type == '1' ?  '' : '-' + item.amount;
 
             transactions.push(item);
           });
