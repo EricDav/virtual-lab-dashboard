@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../_services/user.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -9,56 +11,68 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  email = '';
-  password = '';
-  isSubmit = false;
-  submitClass = 'cur-w';
+  loginForm: FormGroup;
+  isLoading = false;
+  isError = false;
   errorMessage = '';
+
   constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
-  login() {
-    console.log('Here');
-    const data = {
-      email: this.email,
-      password: this.password
+  onSubmit() {
+    this.errorMessage = '';
+    this.isError = false;
+
+    if (!this.f.email.value.trim()) {
+      this.isError = true;
+      this.errorMessage = '  Email is required';
+      return;
+    } 
+
+    if (!this.f.password.value.trim()) {
+      this.isError = true;
+      this.errorMessage = '  Password is required';
+      return;
     }
+
+    const data = {
+      email: this.f.email.value,
+      password: this.f.password.value
+    }
+    this.isLoading = true;
     this.userService.login(data)
     .pipe(first())
     .subscribe(
-      result =>  {
-        console.log(result);
-        if (result.success) {
-          this.router.navigate(['/dashboard']);
-        } else {
-          this.errorMessage = result.message;
-        }
-      },
-      error => {
-        console.log(error);
-      });
+        data =>  {
+          this.isLoading = false;
+          console.log(data);
+          if (data.success) {
+            if (!data.user.is_verified) {
+              localStorage.setItem('verifyEmail', data.user.email);
+              this.router.navigate(['/verify']);
+              return;
+            }
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.errorMessage = data.message;
+          }
+        },
+        error => {
+            this.isError = true;
+            this.errorMessage = 'Server error';
+            this.isLoading = false;
+        });
   }
 
-  onEmailChange(event) {
-    this.email = event.target.value;
-    if (this.email.trim() && this.password.trim()) {
-      this.isSubmit = true;
-      this.submitClass = 'cur';
-    }
-  }
-
-  onPasswordChange(event) {
-    this.password = event.target.value;
-    if (this.email.trim() && this.password.trim()) {
-      this.isSubmit = true;
-      this.submitClass = 'cur';
-    }
-  }
-
+  get f() { return this.loginForm.controls; }
 }

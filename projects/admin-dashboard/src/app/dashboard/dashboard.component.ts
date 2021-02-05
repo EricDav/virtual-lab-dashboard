@@ -10,12 +10,12 @@ import { first } from 'rxjs/operators';
 export class DashboardComponent implements OnInit {
 
   transactions = [];
-  schoolCount = 0;
   pinsCount = 0;
   activatedCount = 0;
-  balance = 0;
+  balance = '0';
   token = '';
   isEmpty = false;
+  isLoading = true;
   constructor(
     private userService: UserService
   ) { }
@@ -63,26 +63,29 @@ export class DashboardComponent implements OnInit {
 
   getDetails() {
     var f = this;
+    this.isLoading = true;
     this.userService.getDetails(this.token)
     .pipe(first())
     .subscribe(
         data =>  {
+          this.isLoading = false;
           console.log(data);
           if (data.success) {
             this.transactions = data.data.transactions;
-            this.schoolCount = data.data.school_count.count;
             this.pinsCount = data.data.pin_count.count;
             this.activatedCount = data.data.activation_count.count;
-            this.balance = data.data.balance.amount;
+            let formatedNum = Number.parseInt(data.data.balance.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            this.balance = formatedNum;
           }
           const transactions = [];
           this.transactions.forEach(function(item, index) {
+            item.balance = Number.parseInt(item.balance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
             item.pos = index + 1;
             var dateStr = item.date_created  + ' UTC';
             var fixtureDate = f.formatDateCreated(new Date(dateStr.replace(/-/g, '/')));
             item.date_created = fixtureDate;
-            item.credit = item.transaction_type == '1' ? item.amount : '';
-            item.debit = item.transaction_type == '1' ?  '' : '-' + item.amount;
+            item.credit = item.transaction_type == '1' ? Number.parseInt(item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '';
+            item.debit = item.transaction_type == '1' ?  '' : '-' + Number.parseInt(item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
             transactions.push(item);
           });
@@ -94,6 +97,7 @@ export class DashboardComponent implements OnInit {
           }
         },
         error => {
+          this.isLoading = false;
           console.log(error);
         });
   }

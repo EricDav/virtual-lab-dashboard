@@ -17,10 +17,14 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { LogoutGuard } from './_guard/logout.guard';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { VerifyComponent } from './verify/verify.component';
+import { SalesOutletComponent } from './sales-outlet/sales-outlet.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent, canActivate: [LogoutGuard]},
   {path: 'signup', component: SignupComponent,  canActivate: [LogoutGuard]},
+  {path: 'verify', component: VerifyComponent,  canActivate: [LogoutGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'generate-pin', component: GeneratePinComponent, canActivate: [AuthGuard]},
   {path: 'pins', component: PinsComponent, canActivate: [AuthGuard]},
@@ -31,9 +35,11 @@ const routes: Routes = [
   {path: 'activation-keys', component: ActivationKeysComponent, canActivate: [AuthGuard]},
   {path: 'transactions', component: TransactionListComponent, canActivate: [AuthGuard]},
   {path: 'transfers', component: TransfersComponent, canActivate: [AuthGuard]},
+  {path: 'sales-outlet', component: SalesOutletComponent, canActivate: [AuthGuard]},
   {path: 'deposit', component: DepositComponent, canActivate: [AuthGuard]},
   {path: 'teachers', component: TeachersComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'forgotpassword', component: ForgotpasswordComponent, canActivate: [LogoutGuard]},
 ];
 
 @NgModule({

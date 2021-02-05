@@ -14,6 +14,8 @@ export class TransfersComponent implements OnInit {
   showError = false;
   errorMessage = '';
   token = '';
+  isLoading = false;
+  btnText = 'Transfer';
 
   constructor(
     private userService: UserService,
@@ -53,11 +55,14 @@ export class TransfersComponent implements OnInit {
       this.errorMessage = 'Amount is required';
       return;
     }
-
+    this.isLoading = true;
+    this.btnText = 'Transferring...';
     this.userService.transferFund(data)
     .pipe(first())
     .subscribe(
         data =>  {
+          this.isLoading = false;
+          this.btnText = 'Transfer';
           if (data.success) {
             this.showSuccess = true;
             this.showError = false;
@@ -68,6 +73,8 @@ export class TransfersComponent implements OnInit {
           }
         },
         error => {
+          this.isLoading = false;
+          this.btnText = 'Transfer';
           console.log(error);
         });
   }

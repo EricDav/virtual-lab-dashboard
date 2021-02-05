@@ -24,6 +24,9 @@ import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { VerifyComponent } from './verify/verify.component';
+import { SalesOutletComponent } from './sales-outlet/sales-outlet.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     FooterComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    ForgotpasswordComponent,
+    VerifyComponent,
+    SalesOutletComponent
   ],
   imports: [
     BrowserModule,

@@ -8,12 +8,18 @@ import { Component, OnInit, HostListener } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   scrHeight = '300px';
+  current = localStorage.getItem('currentTab');
+  currentTab = this.current ? this.current : 1;
   scrWidth = window.innerWidth;
 
   constructor() { }
 
   ngOnInit(): void {
     this.getScreenSize();
+  }
+
+  setHighlight(num) {
+    localStorage.setItem('currentTab', num);
   }
 
   @HostListener('window:resize', ['$event'])

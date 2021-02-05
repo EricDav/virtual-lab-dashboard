@@ -13,6 +13,7 @@ export class PinsComponent implements OnInit {
   currentPin = '';
   pinHistory = [];
   isEmpty = false;
+  isLoading = true;
   constructor(private pinService: PinService,)
    { }
 
@@ -68,7 +69,7 @@ export class PinsComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data =>  {
-          console.log(data);
+          this.isLoading = false;
           if (data.success) {
             this.pinHistory = data.data;
           }
@@ -88,17 +89,19 @@ export class PinsComponent implements OnInit {
 
   getPins() {
     let pins = [];
+    this.isLoading = true;
     this.pinService.get(this.token)
     .pipe(first())
     .subscribe(
         data =>  {
-          console.log(data);
+          this.isLoading = false;
           var f = this;
           data.data.forEach(function(item, index) {
             var dateStr = item.date_created  + ' UTC';
             var fixtureDate = f.formatDateCreated(new Date(dateStr.replace(/-/g, '/')));
             item.pos = index + 1;
             item.date_created = fixtureDate;
+            item.balance = Number.parseInt(item.balance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
             pins.push(item);
           });
           this.pins = pins;
@@ -109,6 +112,7 @@ export class PinsComponent implements OnInit {
           }
         },
         error => {
+          this.isLoading = false;
           console.log(error);
         });
   }

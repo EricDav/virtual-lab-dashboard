@@ -36,7 +36,7 @@
                <div class="clearfix"> </div>
            </div>
            <div style="margin-top: 10px;" class="row">
-            <button (click)="onClick()"  type="submit" class="btn btn-warning warning_33">Activate Now</button>
+            <button [disabled]="isLoading" (click)="onClick()"  type="submit" class="btn btn-warning warning_33">{{btnText}}</button>
             </div>
         </div>
            </div>

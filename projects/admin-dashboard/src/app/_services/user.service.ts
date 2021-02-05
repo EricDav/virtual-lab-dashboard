@@ -48,6 +48,46 @@ export class UserService {
         }));
     }
 
+    initiateForgotPasword(data) {
+        return this.http.post<any>(environment.apiBaseUrl + '/users/forgotpassword/initiate', data)
+        .pipe(map(result => {
+            return result;
+        }));
+    }
+
+    verifyForgotPasword(data) {
+        return this.http.post<any>(environment.apiBaseUrl + '/users/forgotpassword/verify', data)
+        .pipe(map(result => {
+            return result;
+        }));
+    }
+
+    verifyUser(data) {
+        return this.http.post<any>(environment.apiBaseUrl + '/users/account/verify', data)
+        .pipe(map(user => {
+            if (!user.success) {
+                return user;
+            }
+            
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            const loginDate = new Date().toString(); // Date time the user logs in
+            localStorage.setItem('currentUser', user.token);
+            localStorage.setItem('user', JSON.stringify(user.user));
+            localStorage.setItem('_ld', loginDate);
+            localStorage.setItem('_exp', user.exp);
+            localStorage.setItem('currentTab', '1');
+            this.currentUserSubject.next(user.token);
+            return user;
+        }));
+    }
+
+    sendVerificatioCode(data) {
+        return this.http.post<any>(environment.apiBaseUrl + '/users/account/initiate', data)
+        .pipe(map(result => {
+            return result;
+        }));
+    }
+
     getDetails(token) {
         return this.http.get<any>(environment.apiBaseUrl + '/user-details?token='+token)
         .pipe(map(response => {
@@ -58,15 +98,17 @@ export class UserService {
     login(data) {
         return this.http.post<any>(environment.apiBaseUrl + '/users/login', data)
         .pipe(map(user => {
-            if (!user.success) {
+            if (!user.success || !user.user.is_verified) {
                 return user;
             }
+            
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            const loginDate = new Date().toString(); // Date time the user logsin
+            const loginDate = new Date().toString(); // Date time the user logs in
             localStorage.setItem('currentUser', user.token);
             localStorage.setItem('user', JSON.stringify(user.user));
             localStorage.setItem('_ld', loginDate);
             localStorage.setItem('_exp', user.exp);
+            localStorage.setItem('currentTab', '1');
             this.currentUserSubject.next(user.token);
             return user;
         }));
@@ -75,7 +117,7 @@ export class UserService {
     signup(data) {
         return this.http.post<any>(environment.apiBaseUrl + '/users', data)
         .pipe(map(user => {
-            if (!user.success) {
+            if (!user.success || !user.is_verified) {
                 return user;
             }
 
@@ -86,6 +128,7 @@ export class UserService {
             localStorage.setItem('user', JSON.stringify(user.user));
             localStorage.setItem('_ld', loginDate);
             localStorage.setItem('_exp', user.exp);
+            localStorage.setItem('currentTab', '1');
             this.currentUserSubject.next(user.token);
             return user;
         }));

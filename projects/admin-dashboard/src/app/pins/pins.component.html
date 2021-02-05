@@ -53,6 +53,7 @@
                        </tr>
                      </tbody>
                    </table>
+                   <div *ngIf="isLoading" class="loader" id="loader-1"></div>
                    <div *ngIf="isEmpty" style="text-align: center;font-weight: 700;">You have not generated any pin yet.</div>
                   </div>
               </div>

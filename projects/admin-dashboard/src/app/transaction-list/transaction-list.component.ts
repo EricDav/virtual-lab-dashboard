@@ -12,6 +12,7 @@ export class TransactionListComponent implements OnInit {
   transactions = [];
   token = '';
   isEmpty = false;
+  isLoading = false;
   constructor(
     private transactionService:  TransactionService
   ) { }
@@ -60,14 +61,17 @@ export class TransactionListComponent implements OnInit {
   getTransactions() {
     let transactions = [];
     var f = this;
+    this.isLoading = true;
     this.transactionService.get(this.token)
     .pipe(first())
     .subscribe(
         data =>  {
+          this.isLoading = false;
           data.data.forEach(function(item, index) {
+            item.balance = Number.parseInt(item.balance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
             item.pos = index + 1;
-            item.credit = item.transaction_type == '1' ? item.amount : '';
-            item.debit = item.transaction_type == '1' ?  '' : '-' + item.amount;
+            item.credit = item.transaction_type == '1' ? Number.parseInt(item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '';
+            item.debit = item.transaction_type == '1' ?  '' : '-' + Number.parseInt(item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
             var dateStr = item.date_created  + ' UTC';
             var fixtureDate = f.formatDateCreated(new Date(dateStr.replace(/-/g, '/')));
             item.date_created = fixtureDate;
@@ -76,11 +80,12 @@ export class TransactionListComponent implements OnInit {
           this.transactions = transactions;
           if (this.transactions.length == 0) {
             this.isEmpty = true;
-          } else {
+          } else { 
             this.isEmpty = false;
           }
         },
         error => {
+          this.isLoading = false;
           console.log(error);
         });
   }

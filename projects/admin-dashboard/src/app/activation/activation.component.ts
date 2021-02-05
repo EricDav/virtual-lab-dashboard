@@ -17,6 +17,8 @@ export class ActivationComponent implements OnInit {
   errorMessage = '';
   token = '';
   activationType = '1';
+  isLoading = false;
+  btnText = 'Activate Now';
   constructor(
     private activationService: ActivationService,
   ) { }
@@ -44,11 +46,15 @@ export class ActivationComponent implements OnInit {
       pin_user: user.email,
       product_id: this.productKey
     };
+    this.isLoading = false;
+    this.btnText = 'Activating...';
 
     this.activationService.activateWithPin(data) 
     .pipe(first())
     .subscribe(
         data =>  {
+          this.isLoading = false;
+          this.btnText = 'Activate Now';
           if (data.success) {
             this.activationKey = data.activation_key
             this.showSuccess = true;
@@ -58,6 +64,8 @@ export class ActivationComponent implements OnInit {
           }
         },
         error => {
+          this.isLoading = false;
+          this.btnText = 'Activate Now';
           this.showError = true;
           this.errorMessage = 'An unknown error occured';
         });
@@ -69,10 +77,14 @@ export class ActivationComponent implements OnInit {
       product_id: this.productKey
     };
 
+    this.isLoading = false;
+    this.btnText = 'Activating...';
     this.activationService.activate(data) 
     .pipe(first())
     .subscribe(
         data =>  {
+          this.isLoading = false;
+          this.btnText = 'Activate Now';
           if (data.success) {
             this.activationKey = data.activation_key
             this.showSuccess = true;
@@ -82,6 +94,8 @@ export class ActivationComponent implements OnInit {
           }
         },
         error => {
+          this.isLoading = false;
+          this.btnText = 'Activate Now';
           this.showError = true;
           this.errorMessage = 'An unknown error occured';
         });
@@ -91,9 +105,11 @@ export class ActivationComponent implements OnInit {
     console.log(this.productKey.trim().length);
     if (!this.productKey) {
       this.errorMessage = 'Product Key can not be empty';
-    } else if (this.productKey.trim().length != 20) {
-      this.errorMessage = 'Product Key must be 20 digits';
-    } else if (this.activationType == '2' && !this.pin) {
+    // } else if (this.productKey.trim().length != 20) {
+    //   this.errorMessage = 'Product Key must be 20 digits';
+    // } 
+  }
+    else if (this.activationType == '2' && !this.pin) {
       this.errorMessage = 'Pin is required';
     }
 

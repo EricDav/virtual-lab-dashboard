@@ -27,10 +27,14 @@ export class ProfileComponent implements OnInit {
     phone_number: '',
     name: ''
   };
+  isLoading = false;
+  btnText = 'Update Profile';
 
   token = '';
   newPassword = '';
   oldPassword = '';
+  isLoadingPassword = false;
+  btnTextPassword = 'Update Password';
   constructor(
     private userService: UserService
   ) { }
@@ -77,11 +81,14 @@ export class ProfileComponent implements OnInit {
       phone_number: this.user.phone_number,
       token: this.token
     };
-
+    this.isLoading = true;
+    this.btnText = 'Updating...';
     this.userService.updateProfile(data)
     .pipe(first())
     .subscribe(
         data =>  {
+          this.isLoading = false;
+          this.btnText = 'Update Profile';
           if (data.success) {
             localStorage.setItem('user', JSON.stringify(this.user));
             this.showSuccess = true;
@@ -92,8 +99,8 @@ export class ProfileComponent implements OnInit {
           
         },
         error => {
-            // this.loading = false;
-            // this.buttonText = 'Submit Now';
+          this.isLoading = false;
+          this.btnText = 'Update Profile';
             let errorMessage = error.error.message;
 
            this.displayServerError(errorMessage);
@@ -118,6 +125,10 @@ export class ProfileComponent implements OnInit {
 
     if (errorMessage.hasOwnProperty('email')) { 
       this.errorMessage.email = errorMessage.email;
+    }
+
+    if (errorMessage.hasOwnProperty('phone_number')) { 
+      this.errorMessage.phoneNumber = errorMessage.phone_number;
     }
   }
 
@@ -147,11 +158,14 @@ export class ProfileComponent implements OnInit {
       token: this.token
     };
 
+    this.isLoadingPassword = true;
+    this.btnTextPassword = 'Updating...';
     this.userService.updatePassword(data)
     .pipe(first())
     .subscribe(
         data =>  {
-          console.log(data);
+          this.isLoadingPassword = false;
+          this.btnTextPassword = 'Update Password';
           if (data.success) {
             this.showPasswordSuccess = true;
           } else {
@@ -161,8 +175,8 @@ export class ProfileComponent implements OnInit {
           
         },
         error => {
-            // this.loading = false;
-            // this.buttonText = 'Submit Now';
+          this.isLoadingPassword = false;
+          this.btnTextPassword = 'Update Password';
             let errorMessage = error.error.message;
 
            this.displayServerError(errorMessage);

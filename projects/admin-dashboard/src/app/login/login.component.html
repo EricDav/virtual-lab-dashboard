@@ -1,25 +1,27 @@
 <div class="login-body">
 <div class="login-logo">
-    <h2>Virtual Science Lab</h2>
-  </div>
-  <h2 class="form-heading">login</h2>
-  <div class="app-cam">
-	  <form >
-        <div style="color:rgb(255, 0, 0); font-size: 13px; font-style: oblique;">
-            {{errorMessage}}
+    <h2>Mavinhub</h2>
+  </div>  
+    <div class="apply-gd-right col-lg-6 mt-lg-0 mt-5">
+      <div class="apply-form p-sm-5 p-4">
+        <h5>Reseller Login</h5>
+        <div *ngIf="errorMessage" style = 'height: 50px; display: flex; align-items: center;padding: 5px !important' class = 'alert alert-danger'>
+          <span style="margin-right: 5px;" class = 'fa fa-exclamation-circle'></span>
+          <span>{{errorMessage}}</span>
         </div>
-		<input (keyup)="onEmailChange($event)" type="text" class="text" placeholder="Email address">
-		<input (keyup)="onPasswordChange($event)" type="password" placeholder="password">
-		<div class="submit"><input class="{{submitClass}}" [disabled]="!isSubmit" type="submit" (click)="login()"></div>
-
-		<ul class="new">
-			<li class="new_left"><p><a href="#">Forgot Password ?</a></p></li>
-			<li class="new_right"><p class="sign">New here ?<a routerLink="signup"> Sign Up</a></p></li>
-			<div class="clearfix"></div>
-		</ul>
-	</form>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div style="margin-top: 20px; margin-bottom: 20px;" class="form-group">
+                    <input formControlName="email" type="email" class="form-control" placeholder="Email*" required="">
+                </div>
+                        
+                  <div style="margin-top: 20px; margin-bottom: 20px;" class="form-group">
+                            <input formControlName="password" type="password" class="form-control" placeholder="Password*" required="">
+                        </div>
+          <button [disabled]="isLoading" type="submit" class="btn btn-primary submit ">Login Now</button>
+                    </form>
+                    <div class="account-d">Don't have an account? <a routerLink="/signup">Sign Up</a></div>
+                    <div class="account-d"><a routerLink="/forgotpassword">Forgot Password?</a></div>
+      </div>
+    
   </div>
-   <div class="copy_layout login">
-      <p>Copyright &copy; 2020 Virtual Science Lab. All Rights Reserved</p>
-   </div>
 </div>

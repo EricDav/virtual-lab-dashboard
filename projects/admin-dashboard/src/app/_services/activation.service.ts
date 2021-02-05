@@ -18,7 +18,7 @@ export class ActivationService {
     }
 
     activateWithPin(data) {
-        return this.http.post<any>(environment.apiBaseUrl + '/v1/activate', data)
+        return this.http.post<any>(environment.apiBaseUrl + '/activate', data)
         .pipe(map(activation => {
             return activation;
         }));

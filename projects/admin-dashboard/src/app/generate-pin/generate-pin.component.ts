@@ -13,6 +13,8 @@ export class GeneratePinComponent implements OnInit {
     showSuccess = false;
     token = '';
     errorMessage = '';
+    isLoading = false;
+    btnText = 'Generate';
     constructor(
       private pinService: PinService,
     ) { }
@@ -42,6 +44,8 @@ export class GeneratePinComponent implements OnInit {
       if (this.errorMessage) {
         return;
       }
+      this.isLoading = true;
+      this.btnText = 'Generating...';
       const data = {
         token: this.token,
         num_pins: this.qty,
@@ -51,6 +55,8 @@ export class GeneratePinComponent implements OnInit {
       .pipe(first())
       .subscribe(
           data =>  {
+            this.isLoading = false;
+            this.btnText = 'Generate';
              if (data.success) {
               this.showSuccess = true;
              } else {
@@ -59,6 +65,9 @@ export class GeneratePinComponent implements OnInit {
              }
           },
           error => {
+            this.isLoading = false;
+            this.btnText = 'Generate';
+            
             this.showSuccess = false;
             this.errorMessage = 'Unexpected error occurred';
           });
